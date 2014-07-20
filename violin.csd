@@ -16,12 +16,15 @@ ifreq		= cpspch(p5)		; set tuning ratio in Hertz
 iattack		= p6			; attack time
 idecay		= 0.5			; decay time
 iwave		= 1
+ivibrate	= 0.5
+irate 		= 0.01*ifreq
 
 isus	= idur - iattack - idecay	; sustain is remaining duration
 
 
 aenv	linseg	0,iattack,iamp,isus,iamp,idecay,0	; amp. env.
-asig	oscili	aenv,ifreq,iwave			; signal
+avib	oscili 	ivibrate, irate, iwave
+asig	oscili	aenv,ifreq + avib,iwave			; signal
 	out	asig					; output
 	endin
 ;------------------------------------------------------------------
@@ -33,12 +36,16 @@ ifreq		= cpspch(p5)		; set tuning ratio in Hertz
 iattack		= p6			; attack time
 idecay		= 0.5			; decay time
 iwave		= 1
+ivibrate	= 0.5
+irate 		= 0.01*ifreq
+
 
 isus	= idur - iattack - idecay	; sustain is remaining duration
 
 
 aenv	linseg	0,iattack,iamp,isus,iamp,idecay,0	; amp. env.
-asig	oscili	aenv,ifreq,iwave			; signal
+avib	oscili 	ivibrate, irate, iwave
+asig	oscili	aenv,ifreq + avib,iwave			; signal
 	out	asig					; output
 	endin
 ;------------------------------------------------------------------
